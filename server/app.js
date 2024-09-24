@@ -1,7 +1,4 @@
 import express from "express";
-import https from "https";
-import fs from "fs";
-import cors from "cors";
 import {
   getTodosById,
   getTodoById,
@@ -17,25 +14,13 @@ import {
 
 const app = express().use(express.json());
 
-const options = {
-  key: fs.readFileSync("key.pem"),
-  cert: fs.readFileSync("cert.pem"),
-};
-
-const httpsServer = https.createServer(options, app);
-
-httpsServer.listen(443, "localhost", () => {
-  console.log("Servidor HTTPS escuchando en localhost:443");
-});
-
-app.use(cors());
-
-// {
-//     origin: "http://192.168.1.2:8081",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   }
-
+app.listen(8080, (err) => {
+  if (err) {
+    console.log('Error',err)
+  } else {
+    console.log('Servidor en puerto 8080')
+  }
+})
 
 app.get("/todos/:id", async (req, res) => {
   // recupera todos x id

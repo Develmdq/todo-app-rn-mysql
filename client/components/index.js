@@ -1,5 +1,5 @@
-import Task from "./Task";
+import ListTodos from "./ListTodos";
 
 
 
-export {Task}
+export { ListTodos };

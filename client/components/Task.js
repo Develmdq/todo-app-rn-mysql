@@ -1,25 +1,43 @@
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import CheckMark from "./CheckMark";
+import { useFonts, Solitreo_400Regular } from "@expo-google-fonts/solitreo";
 
-import { StyleSheet, View, Text } from "react-native";
+const Task = ({ title, id, completed, toggleTodo }) => {
+  let [fontsLoaded] = useFonts({Solitreo_400Regular});
+  if (!fontsLoaded) return null;
 
-const Task = ({ title }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
+    <TouchableOpacity style={styles.container}>
+      <View style={styles.row}>
+        <CheckMark completed={completed} />
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     padding: 10,
-    margin: 10 ,
-    borderRadius:10,
+    margin: 10,
+    borderRadius: 10,
   },
   title: {
-    color: '#312f2f',
-    marginBottom: 10
-  }
-})
+    color: "#312f2f",
+    fontSize: 16,
+    fontFamily: "Solitreo_400Regular",
+  },
+  row: {
+    flexDirection: "row",
+    gap: 10,
+    alignItems: "center",
+  },
+});
 
 export default Task;
