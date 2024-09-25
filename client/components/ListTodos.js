@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { FlatList, ScrollView, StyleSheet, Text } from "react-native";
+import { FlatList, StyleSheet, Text } from "react-native";
 import Task from "./Task";
 
 const ListTodos = () => {
-  const [todos, setTodos] = useState();
+  const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,6 +17,18 @@ const ListTodos = () => {
     }
     fetchData();
   }, []);
+
+  const clearTodo = (id) => setTodos(todos.filter((todo) => todo.id !== id));
+  const toggleTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id
+          ? { ...todo, completed: todo.completed === 1 ? 0 : 1 }
+          : todo
+      )
+    );
+  };
+
   return (
     <FlatList
       ListHeaderComponent={() => <Text style={styles.title}>Today</Text>}
@@ -25,9 +37,7 @@ const ListTodos = () => {
       data={todos}
       keyExtractor={(todo) => todo.id}
       renderItem={({ item }) => (
-        <ScrollView>
-          <Task {...item} />
-        </ScrollView>
+        <Task {...item} clearTodo={clearTodo} toggleTodo={toggleTodo} />
       )}
     />
   );
