@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FlatList, StyleSheet, Text } from "react-native";
 import Task from "./Task";
+import InputTask from "./InputTask";
 
 const ListTodos = () => {
   const [todos, setTodos] = useState([]);
@@ -30,16 +31,19 @@ const ListTodos = () => {
   };
 
   return (
-    <FlatList
-      ListHeaderComponent={() => <Text style={styles.title}>Today</Text>}
-      contentContainerStyle={styles.contentContainer}
-      scrollEnabled={true}
-      data={todos}
-      keyExtractor={(todo) => todo.id}
-      renderItem={({ item }) => (
-        <Task {...item} clearTodo={clearTodo} toggleTodo={toggleTodo} />
-      )}
-    />
+    <>
+      <FlatList
+        ListHeaderComponent={() => <Text style={styles.title}>Today</Text>}
+        contentContainerStyle={styles.contentContainer}
+        scrollEnabled={true}
+        data={todos}
+        keyExtractor={(todo) => todo.id}
+        renderItem={({ item }) => (
+          <Task {...item} clearTodo={clearTodo} toggleTodo={toggleTodo} />
+        )}
+      />
+      <InputTask todos={todos} setTodos={setTodos} />
+    </>
   );
 };
 

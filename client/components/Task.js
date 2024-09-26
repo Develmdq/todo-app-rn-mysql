@@ -75,7 +75,7 @@ const Task = ({
         snapPoints={snapPoints}
         backgroundStyle={{ borderRadius: 50, borderWidth: 4 }}
       >
-        <Text>Hola</Text>
+        <TodoModalContent id={id} title={title} />
       </BottomSheetModal>
     </TouchableOpacity>
   );

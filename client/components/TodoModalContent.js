@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Keyboard, View, Text, StyleSheet, Button, Alert } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-export default function TodoModalContent({ id, title }) {
+const TodoModalContent =({ id, title })=> {
   const [email, setEmail] = useState("");
   const [focus, setFocus] = useState(false);
 
   const handleSubmit = async () => {
-    const response = await fetch("http://localhost:8080/todos/shared_todos", {
+    const response = await fetch("http://192.168.1.2:8080/todos/shared_todos", {
       headers: {
         "x-api-key": "abcdef123456",
         "Content-Type": "application/json",
@@ -20,24 +20,23 @@ export default function TodoModalContent({ id, title }) {
       }),
     });
     const data = await response.json();
-    console.log(data);
+    console.log(data); //:TODO
     Keyboard.dismiss();
     setEmail("");
     setFocus(false);
     Alert.alert(
-      "Congratulations 🎉",
-      `You successfully shared ${title} with ${email}`,
+      "Felicitaciones 🎉",
+      `Compartiste la tarea ${title} con ${email}`,
       [{ text: "Okay" }]
     );
   };
 
   return (
     <View style={styles.contentContainer}>
-      <Text style={[styles.title, { marginBottom: 20 }]}>Share your task</Text>
+      <Text style={[styles.title, { marginBottom: 20 }]}>Comparte tu tarea</Text>
       <Text style={[styles.title, { marginBottom: 20 }]}>"{title}"</Text>
       <Text style={styles.description}>
-        Enter the email of the user you want to share your task with. Share a
-        task with someone and stay in sinc with your goals everyday.
+        Ingresa el email del usuario con el que quieres compartir tu tarea.
       </Text>
       <TextInput
         value={email}
@@ -45,16 +44,13 @@ export default function TodoModalContent({ id, title }) {
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         keyboardType="email-address"
-        style={[
-          styles.input,
-          focus && { borderWidth: 3, borderColor: "black" },
-        ]}
-        placeholder="Enter your contact email"
+        style={[styles.input, focus && { borderWidth: 3, borderColor: "#252020" }]}
+        placeholder="Ingresa el email de tu contacto"
       />
       <Button
         onPress={handleSubmit}
-        title="Share"
-        disabled={email.length === 0}
+        title="Compartir"
+        disabled={email.length === 0 || !email.includes('@')}
       />
     </View>
   );
@@ -84,3 +80,5 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
 });
+
+export default TodoModalContent

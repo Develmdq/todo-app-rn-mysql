@@ -2,7 +2,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Constants from "expo-constants";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import { ListTodos } from "./components";
+import ListTodos from "./components/ListTodos";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
@@ -12,7 +12,6 @@ export default function App() {
         <StatusBar style="light" />
         <SafeAreaView style={styles.saveAreaStyle}>
           <ListTodos />
-          {/* <InputTask todos={todos} setTodos={setTodos} /> */}
         </SafeAreaView>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>

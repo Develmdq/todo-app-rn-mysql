@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, Pressable } from "react-native";
 
 const CheckMark = ({ id, completed, toggleTodo }) => {
@@ -12,9 +11,7 @@ const CheckMark = ({ id, completed, toggleTodo }) => {
   };
   return (
     <Pressable
-      style={[
-        styles.checkMark,
-        { backgroundColor: completed ? "#0ee957" : "#d5d5d8" },
+      style={[ styles.checkMark, { backgroundColor: completed ? "#10ca4e" : "#d5d5d8" },
       ]}
       onPress={toggle}
     ></Pressable>

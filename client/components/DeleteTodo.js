@@ -1,8 +1,6 @@
-import React from 'react';
 import { StyleSheet, Text, Pressable } from "react-native";
 
 const DeleteTodo = () => {  
-
   return (
     <Pressable  style={styles.btnDelete}>
       <Text style={styles.iconDelete}>X</Text>
